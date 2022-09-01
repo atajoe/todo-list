@@ -1,42 +1,28 @@
-// const todoFactory = (title, description, date) =>{
-//     this.title = title;
-//     this.description = description;
-//     this.date = date;
-//     const printTitle = () => (`This is your title" ${this.title}`)
-//     return {printTitle}
-
-// }
-
-const button = document.querySelector('#submit1')
 const homebutton = document.querySelector('#home')
-const projectbutton = document.querySelector('#project')
 const newprojectform = document.querySelector('.newprojectform')
+const newprojectmaster = document.querySelector('#project-master')
+const button = document.querySelector('#submit1')
+const button2 = document.querySelector('#submit2')
+const projectbutton = document.querySelector('#project')
 
 
 
-homebutton.addEventListener('click', (e)=>{
-    console.log('lmfaooo')
-})
-projectbutton.addEventListener('click', (e)=>{
-    console.log('lmfaooo')
-    newprojectform.style.transform = "scale(1)";
-})
 
-button.addEventListener('click', (e) =>{
-    omar.addextraproject('Button tester', 'Omar', '2023 :)')
-    e.preventDefault()
-    console.log(omar.print_list_of_projects())
-    newprojectform.style.transform = "scale(0)";
-    formFunction()
+function newprojectFormFunction(){
+    let form = document.querySelector('#newprojectformaster')
+    let title = form.title.value
 
-})
+    return title
+}
 
 function formFunction() {
     let form = document.querySelector('.newprojectform')
-    // Array.from(form.elements).forEach(element => {
-    //     console.log({'item': element.value})
-    // })
-    console.log([form.title.value, form.description.value, form.date.value])
+    let newobject = {}
+    newobject['title'] = form.title.value
+    newobject['description'] = form.description.value
+    newobject['date'] = form.date.value
+    
+    return newobject
 }
 
 
@@ -50,42 +36,64 @@ function createPerson(firstName, lastName) {
     };
   }
 
-const newProject = (title,description,date) => {
-        let project_list = [];
-        let project = {};
-        project.title = title;
-        project.description = description;
-        project.date = date;
-        project_list.push(project)
+const newProject = (() => {
+        let new_project = {};
         return{
             talk : () => {
                 console.log(`Yo this is your full project description: ${title}, ${description}, ${date}`)
             },
             print_list_of_projects : () => {
-                project_list.forEach((project, index) => {
-                    console.log(`Project ${index} : ${JSON.stringify(project)}`)
-                })
+                console.log(JSON.stringify(new_project))
                 return;
             },
-            project_list,
-            addextraproject : (title,description,date) => {
-                project = {};
-                project.title = title, project.description = description, project.date = date;
-                project_list.push(project)
+            addextraproject : (randomobject1) => {
+                new_project[randomobject1] = []
                 return;
+            },
+            addToDoNew : (randomobject) => {
+                let newtodo = randomobject
+                new_project.randomobject1.push(newtodo)
             }
         }
+})()
+
+
+const addToDo = () => {
+
 }
 
+newprojectmaster.addEventListener('click', (e) =>{
+    newprojectformaster.style.transform = "scale(1)";
+})
+
+button2.addEventListener('click', (e) =>{
+    e.preventDefault()
+    newprojectformaster.style.transform = "scale(0)";
+    let newproject = newprojectFormFunction()
+    newProject.addextraproject(newproject)
+    console.log(newProject.print_list_of_projects())
+})
 
 
 
-const omar = newProject('Omak','LOOOL', 2015)
-// omar.project.title = 'Omak2'
+homebutton.addEventListener('click', (e)=>{
+    console.log('lmfaooo')
+})
 
-omar.addextraproject('Omak2', 'LOOL', 2011)
-omar.addextraproject('Omak2', 'LOOL', 2011)
-omar.addextraproject('Omak2', 'LOOL', 2011)
-omar.addextraproject('Omak2', 'LOOL', 2011)
-omar.addextraproject('Omak2', 'LOOL', 2011)
-console.log(omar.print_list_of_projects())
+button.addEventListener('click', (e) =>{
+    e.preventDefault()
+    newprojectform.style.transform = "scale(0)";
+    let newobject = formFunction()
+    newProject.addToDoNew(newobject)
+    console.log(newProject.print_list_of_projects())
+
+})
+
+projectbutton.addEventListener('click', (e)=>{
+    console.log('lmfaooo')
+    newprojectform.style.transform = "scale(1)";
+})
+
+// let randomboject = {'title': 'Omak', 'Description': 'LOOOL', 'Date': 2015}
+// // const omar = newProject(randomboject)
+// console.log(omar.print_list_of_projects())
