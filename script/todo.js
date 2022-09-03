@@ -1,9 +1,12 @@
+"use strict";
+
+
 const homebutton = document.querySelector('#home')
 const newprojectform = document.querySelector('.newprojectform')
-const newprojectmaster = document.querySelector('#project-master')
-const button = document.querySelector('#submit1')
-const button2 = document.querySelector('#submit2')
-const projectbutton = document.querySelector('#project')
+const open_project_form = document.querySelector('#project-master')
+const submit_todo_button = document.querySelector('#submit_todo')
+const submit_project_button = document.querySelector('#submit_project')
+const open_todo_form = document.querySelector('#project')
 
 
 
@@ -11,7 +14,7 @@ const projectbutton = document.querySelector('#project')
 function newprojectFormFunction(){
     let form = document.querySelector('#newprojectformaster')
     let title = form.title.value
-
+    console.log(title)
     return title
 }
 
@@ -38,60 +41,63 @@ function createPerson(firstName, lastName) {
 
 const newProject = (() => {
         let new_project = {};
+        let str;
         return{
             talk : () => {
                 console.log(`Yo this is your full project description: ${title}, ${description}, ${date}`)
             },
             print_list_of_projects : () => {
-                console.log(JSON.stringify(new_project))
+                return JSON.stringify(Object.keys(new_project));
+            },
+            addextraproject : (project_title) => {
+                let str = project_title
+                new_project[str] = []
                 return;
             },
-            addextraproject : (randomobject1) => {
-                new_project[randomobject1] = []
-                return;
-            },
-            addToDoNew : (randomobject) => {
-                let newtodo = randomobject
-                new_project.randomobject1.push(newtodo)
+            addToDoNew : (newtodo) => {
+                new_project[str].push(newtodo)
+                // new_project.randomobject1.push(newtodo)
             }
         }
 })()
 
 
-const addToDo = () => {
+// const addToDo = () => {
 
-}
-
-newprojectmaster.addEventListener('click', (e) =>{
-    newprojectformaster.style.transform = "scale(1)";
-})
-
-button2.addEventListener('click', (e) =>{
-    e.preventDefault()
-    newprojectformaster.style.transform = "scale(0)";
-    let newproject = newprojectFormFunction()
-    newProject.addextraproject(newproject)
-    console.log(newProject.print_list_of_projects())
-})
-
+// }
 
 
 homebutton.addEventListener('click', (e)=>{
     console.log('lmfaooo')
 })
 
-button.addEventListener('click', (e) =>{
-    e.preventDefault()
-    newprojectform.style.transform = "scale(0)";
-    let newobject = formFunction()
-    newProject.addToDoNew(newobject)
-    console.log(newProject.print_list_of_projects())
 
+open_project_form.addEventListener('click', (e) =>{
+    newprojectformaster.style.transform = "scale(1)";
 })
 
-projectbutton.addEventListener('click', (e)=>{
+submit_project_button.addEventListener('click', (e) =>{
+    e.preventDefault()
+    let newobject = newprojectFormFunction()
+    newProject.addextraproject(newobject)
+    console.log(newProject.print_list_of_projects())
+    newprojectformaster.style.transform = "scale(0)";
+})
+
+
+
+open_todo_form.addEventListener('click', (e)=>{
     console.log('lmfaooo')
     newprojectform.style.transform = "scale(1)";
+})
+
+submit_todo_button.addEventListener('click', (e) =>{
+    e.preventDefault()
+    let newtodo = formFunction()
+    newProject.addToDoNew(newtodo)
+    console.log(newProject.print_list_of_projects())
+    newprojectform.style.transform = "scale(0)";
+
 })
 
 // let randomboject = {'title': 'Omak', 'Description': 'LOOOL', 'Date': 2015}
