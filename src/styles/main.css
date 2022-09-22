@@ -7,7 +7,7 @@
     /* border: 2px solid red; */
 }
 body{
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
 }
 
@@ -15,6 +15,7 @@ body{
     display: grid;
     grid-template-columns: repeat(1, 20%) repeat(1,1fr);
     grid-template-rows: repeat(1, 10%);
+    min-height: 100vh;
 }
 
 #todoheader{
@@ -76,13 +77,13 @@ body{
     text-align: center;
 }
 
-#project{
+#article-todo{
     border-bottom:  1px dashed ;
     width: 75%;
     text-align: center;
 }
 
-#project-master{
+#article-project{
     border-bottom:  1px dashed ;
     width: 75%;
     text-align: center;
@@ -92,7 +93,7 @@ body{
     position: relative;
 }
 
-.newprojectform{
+#openprojectform{
     width: 50%;
     height: 55%;
     display: flex;
@@ -105,16 +106,17 @@ body{
     transform: scale(0);
     transition: 0.5s ease;
     border: 2px solid black;
+    background: darkseagreen;
 
 }
 
 
-.newprojectform label {
+#openprojectform label {
     font-size: 1.6rem;
     color: black;
   }
   
-.newprojectform input[type="text"],
+#openprojectform input[type="text"],
   select {
     font-family: "Poppins", sans-serif;
     padding: 1rem;
@@ -126,7 +128,7 @@ body{
     /* width: 100%; */
   }
   
-.newprojectform input[type="date"] {
+#openprojectform input[type="date"] {
     font-family: "Poppins", sans-serif;
     display: block;
     margin-bottom: 1rem;
@@ -136,7 +138,7 @@ body{
     width: 100%;
   }
   
-.newprojectform input[type="textarea"]{
+#openprojectform input[type="textarea"]{
     font-family: "Poppins", sans-serif;
     font-size: 1.4rem;
     background: #eeeeee;
@@ -146,6 +148,67 @@ body{
     resize: none;
     width: 100%;
   }
+
+
+#opentodoform{
+    width: 50%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    transform: scale(0);
+    transition: 0.5s ease;
+    border: 2px solid black;
+    background: darkseagreen;
+
+}
+
+
+#opentodoform label {
+    font-size: 1.6rem;
+    color: black;
+  }
+  
+#opentodoform input[type="text"],
+  select {
+    font-family: "Poppins", sans-serif;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 0;
+    background: #eeeeee;
+    font-size: 1.4rem;
+    outline: 0;
+    /* width: 100%; */
+  }
+  
+#opentodoform input[type="date"] {
+    font-family: "Poppins", sans-serif;
+    display: block;
+    margin-bottom: 1rem;
+    border: none;
+    background: #eeeeee;
+    padding: 1rem;
+    width: 100%;
+  }
+  
+#opentodoform input[type="textarea"]{
+    font-family: "Poppins", sans-serif;
+    font-size: 1.4rem;
+    background: #eeeeee;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    resize: none;
+    width: 100%;
+  }
+
+
+
+
 
 
 
@@ -203,4 +266,78 @@ body{
 .project-list .project-item:hover{
     color:rgb(243, 76, 76);
 }
+
+.container{
+    position: absolute;
+    left: 50%;
+    bottom: 75%;
+}
+
+#article-todo{
+    height: 10%;
+    border-radius: 15px;
+    width: 15%;
+    background-color: aquamarine;
+    padding: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border:none;
+}
+
+#exit-todo-form{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+#exit-project-form{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.todo-items{
+    background-color: antiquewhite;
+    width: 25%;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.todo-list{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+
+.todo{
+    background-color: antiquewhite;
+    width: 30%;
+    padding: 1rem;
+    margin: 1rem;
+    min-width: 30%;
+    height: 20%;
+}
+
+.todo-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-content{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.master-container{
+    min-height: 100vh;
+}
+
+
 

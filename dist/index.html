@@ -11,37 +11,40 @@
 <body>
     <div class="master-content">
         <header id="todoheader">
-            <img src="/styles/icon.png" alt="icon.png">
+            <img src="/todo-list/src/styles/icon.png" alt="icon.png">
             To-do List
         </header>
         <div class="articlelist">
             <p id="home">Home</p>
-            <p id="project-master">New Project</p>
-            <p id="project">New To-Do</p>
+            <p id="article-project">New Project</p>
             <div class="project-list">
-                
+               
             </div>
         </div>
         <div id="master-container" class="master-container">
-            <form id="newprojectform" class="newprojectform">
+            <form id="opentodoform">
+                <p id="exit-todo-form">X</p>
                 <label for="title">Title:</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" required>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" required>
                 <label for="description">Description:</label>
-                <input type="textarea" id="description" name="description">
+                <input type="textarea" id="description" name="description" required>
                 <button id="submit_todo">Submit</button>
             </form>
-            <form id="newprojectformaster" class="newprojectform">
+            <form id="openprojectform">
+                <p id="exit-project-form">X</p>
                 <label for="title">Title of new Project:</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" required minlength="4">
                 <button id="submit_project">Submit</button>
             </form>
-            <div class="results">
-
-            </div>
+            <p id="article-todo">New To-Do</p>
+                <div class="todo-list">
+                    
+                </div>
+            
         </div>
-
+        
     </div>
 
 </body>

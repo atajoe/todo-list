@@ -1,5 +1,35 @@
+import create_new_project from "./project.js"
+import createNewTask from "./todo.js"
 
-    export function create_task_container(new_task){
+
+function UI () {
+    /*--------ARTICLE LINKS----------*/
+    const homebutton = document.querySelector('#home')
+    const new_project_form = document.querySelector('#article-project')
+    const new_todo_form = document.querySelector('#article-todo')
+
+
+    /*------- ACTIVE PROJECT FORM/TODO FORMS----------*/
+    const open_project_form = document.querySelector('#openprojectform')
+    const submit_project_button = document.querySelector('#submit_project')
+    const exit_project_button = document.querySelector('#exit-project-form') 
+
+    const open_todo_form = document.querySelector('#opentodoform')
+    const submit_todo_button = document.querySelector('#submit_todo')
+    const exit_todo_button = document.querySelector('#exit-todo-form') 
+
+    const results = document.querySelector('.results')
+
+    /*----------MASTER CONTAINER DISPLAYING PROJECTS--------*/
+    const master_container = document.querySelector('.master-container')
+    let project_items = document.querySelectorAll('.project-item')
+    let project_list_html = document.querySelector('.project-list')
+
+    /******* LIST TO RENDER ALL THE NEW PROJECTS ********/
+    const list_of_projects = []
+
+
+    function create_task_container(new_task){
         let task = new_task
         const todo_list = document.querySelector('.todo-list')
         const todo_div = document.createElement('div')
@@ -26,8 +56,8 @@
        return 
     }
 
-    export function loop_through_projects(list){
-        let list_of_projects = list
+
+    function loop_through_projects(list){
         let todo_list = document.querySelector('.todo-list')
         let target_index = list_of_projects.map(project => project.name).indexOf(list)
         let project = list_of_projects[target_index]
@@ -40,8 +70,11 @@
         
    
     }
+    
 
-    export function render_project_to_page(project){
+
+
+    function render_project_to_page(project){
         let new_project = project
         let project_title = project.name
         let project_list = document.querySelector('.project-list')
@@ -58,13 +91,19 @@
     }
 
 
-    export const render_task_to_page = (new_task, array) => {
-        let list_of_projects = array
+
+    function render_todos(){
+        let todo_list = document.querySelector('.todo-list')
+        todo_list.innerHTML = ''
+        return;
+    }
+
+    function render_task_to_page(new_task){
         let project_items = Array.from(document.querySelectorAll('.project-item'))
         let project_id;
         let addproject;
         let grabbed_project;
-     
+
         project_items.forEach((project) => {
             project.className === 'project-item active' ? project_id = project.id: project_id = ''
         })
@@ -81,36 +120,59 @@
         list_of_projects.forEach((project) => {
             console.log(`Here is the project: ${JSON.stringify(project)} and list of tasks: ${JSON.stringify(project.getTasks())}`)
         })
-            
+                          
  
         return;
-    }
+    }   
     
+
     
-    export const dom_manipulate = (array) => {
-        let list_of_projects = array
+    // project_items.forEach(project => {
+    //     project.addEventListener('click', (e) =>{
+    //         results.textContent = JSON.stringify(project)
+    //     })
+    // })
+
+    new_project_form.addEventListener('click', (e) => {
+        open_project_form.style.transform = "scale(1)"
+        console.log(e.target)
+    })
+
+    new_todo_form.addEventListener('click', (e) => {
+        open_todo_form.style.transform = "scale(1)"
+    })
+
+    exit_todo_button.addEventListener('click', (e) => open_todo_form.style.transform = "scale(0)")
+    exit_project_button.addEventListener('click', (e) => open_project_form.style.transform = "scale(0)")
+
+
+    submit_project_button.addEventListener('click', (e) => {
+        e.preventDefault()
+        let new_project = create_new_project(open_project_form.title.value)
+        console.log(new_project)
+        render_project_to_page(new_project)
+        list_of_projects.push(new_project)
+        console.log('Here is list of projects', list_of_projects)
+        open_project_form.style.transform = "scale(0)"
+        dom_manipulate()
+        make_project_active()
+    })
+
+    submit_todo_button.addEventListener('click', (e) => {
+        e.preventDefault()
+        let new_task = createNewTask(open_todo_form.title.value, 
+                                    open_todo_form.date.value, 
+                                    open_todo_form.description.value)
+        console.log(new_task)
+        render_task_to_page(new_task)
+        create_task_container(new_task)
+        open_todo_form.style.transform = "scale(0)"
+    })
+
+
+
+    const dom_manipulate = () => {
         const element = document.querySelectorAll('.project-item')
-
-        let render_todos = () => {
-            let todo_list = document.querySelector('.todo-list')
-            todo_list.innerHTML = ''
-            return;
-        }
-
-       let loop_through_projects = () => {
-       
-            let todo_list = document.querySelector('.todo-list')
-            let target_index = list_of_projects.map(project => project.name).indexOf(list)
-            let project = list_of_projects[target_index]
-            let list_of_tasks = project.getTasks()
-            if (list_of_tasks.length > 0){
-                list_of_tasks.forEach(task => create_task_container(task))
-            } else{
-                todo_list.innerHTML = ""
-            }
-            
-        }
-
         element.forEach(child => {
             child.addEventListener('click', (e) => {
                 
@@ -118,22 +180,29 @@
                 console.log(e)
                 console.log(child.classList)
                 console.log(child.id)
-       
+                // list_of_projects.forEach((project) => project.getTasks() )
                 render_todos()
                 loop_through_projects(child.id)
+                // if (target_project === false){
+                //     project_list_html.innerHTML = ''
+                // } else{
+                //     get_appropriate_project(target_project)
+                // }
+             
 
+                // results.innerHTML = JSON.stringify(child.textContent)
 
             })
         })
     }
 
-    export const make_new_project_active = () => {
+    const make_project_active = () => {
         const element = document.querySelector('.project-list')
         let new_project = element.lastElementChild
         dom_manipulate_active(new_project.classList)
     }
 
-    export const dom_manipulate_active = (target) => {
+    const dom_manipulate_active = (target) => {
         const element = document.querySelectorAll('.project-item')
         
         element.forEach(child => {
@@ -146,13 +215,7 @@
         return 
     }
 
-   
+}
 
 
-
-
-
-
-
-
-// export { create_task_container, get_appropriate_project, loop_through_projects }
+export default UI;
