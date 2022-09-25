@@ -317,8 +317,7 @@ body{
 
 .todo{
     background-color: antiquewhite;
-    width: 30%;
-    padding: 1rem;
+    padding: 2rem;
     margin: 1rem;
     min-width: 30%;
     height: 20%;
@@ -337,6 +336,20 @@ body{
 
 .master-container{
     min-height: 100vh;
+}
+
+.delete-todo{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-todo:hover{
+    color:rgb(141, 132, 132);
 }
 
 
